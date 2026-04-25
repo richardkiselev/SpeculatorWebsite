@@ -8,7 +8,7 @@ async function loadArticles() {
     const card = document.createElement('a');
     card.className = 'article-card';
 
-    card.href = `/pages/articles/view.html?file=${encodeURIComponent(article.file)}`;
+    card.href = `/SpeculatorWebsite/pages/articles/view.html?file=${encodeURIComponent(article.file)}`;
 
     card.innerHTML = `
       <img class="article-image" src="${article.image}" alt="${article.title}">
