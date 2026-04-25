@@ -1,5 +1,5 @@
 async function loadArticles() {
-  const res = await fetch('/pages/articles/0index.json');
+  const res = await fetch('/SpeculatorWebsite/pages/articles/0index.json');
   const articles = await res.json();
 
   const grid = document.getElementById('article-grid');
