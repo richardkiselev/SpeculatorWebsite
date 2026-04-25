@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Articles by The Stuyvesant Speculator</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="header-divider"></div>
+
+  <div class="nav-container">
+    <div class="logo">The Stuyvesant Speculator</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/pages/about.html">About</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiwzPnBp-Sy8zjtK5jMLvuKzEsPiDqa87GvygoJsSDCb_sFg/viewform" class="submit-link">Submissions</a>
+      <a href="https://discord.gg/aHk7kU7A9R" class="submit-link">Discord</a>
+    </nav>
+  </div>
+
+  <div class="header-divider"></div>
+</header>
+
+<div class="content">
+  <div class="main" id="article"></div>
+</div>
+
+<script>
+async function loadArticle() {
+  const params = new URLSearchParams(window.location.search);
+  const file = params.get('file');
+
+  if (!file) {
+    document.getElementById('article').innerText = "No article specified.";
+    return;
+  }
+
+  //ts pmo istg
+  const indexRes = await fetch('/pages/articles/0index.json');
+  const index = await indexRes.json();
+  const meta = index.find(a => a.file === file);
+
+  if (!meta) {
+    document.getElementById('article').innerText = "Article not found in index.";
+    return;
+  }
+
+  const mdRes = await fetch(`/pages/articles/${file}`);
+  const md = await mdRes.text();
+
+  document.getElementById('article').innerHTML = `
+    <div class="article-page">
+
+      <h1 class="article-title">${meta.title}</h1>
+
+      ${meta.image ? `<img class="post-image" src="${meta.image}" />` : ""}
+
+      <p class="article-desc">${meta.description || ""}</p>
+
+      <div class="article-body">
+        ${md.replace(/\n/g, "<br>")}
+      </div>
+
+    </div>
+  `;
+}
+
+loadArticle();
+</script>
+
+</body>
+</html>
