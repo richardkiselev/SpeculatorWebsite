@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Articles by The Stuyvesant Speculator</title>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/SpeculatorWebsite/assets/css/styles.css">
 </head>
 
 <body>
@@ -48,7 +48,7 @@ async function loadArticle() {
     return;
   }
 
-  const mdRes = await fetch(`/pages/articles/${file}`);
+  const mdRes = await fetch(`/SpeculatorWebsite/pages/articles/${file}`);
   const md = await mdRes.text();
 
   document.getElementById('article').innerHTML = `
